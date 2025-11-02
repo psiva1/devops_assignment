@@ -1,0 +1,171 @@
+{
+  "rootFolder": "/Users/siva_pothapragada/Downloads/2024mt03585_dc",
+  "analyzedAt": "2025-11-02T10:31:14.229Z",
+  "rootStructure": [
+    {
+      "name": "Dockerfile",
+      "type": "file",
+      "size": 136,
+      "lines": 12
+    },
+    {
+      "name": "config-2024mt03585.yaml",
+      "type": "file",
+      "size": 138,
+      "lines": 8
+    },
+    {
+      "name": "dep-2024mt03585.yaml",
+      "type": "file",
+      "size": 643,
+      "lines": 31
+    },
+    {
+      "name": "main.py",
+      "type": "file",
+      "size": 720,
+      "lines": 25
+    },
+    {
+      "name": "prometheus.yml",
+      "type": "file",
+      "size": 130,
+      "lines": 8
+    },
+    {
+      "name": "svc-2024mt03585.yaml",
+      "type": "file",
+      "size": 188,
+      "lines": 13
+    }
+  ],
+  "rootFileSnippets": {
+    "Dockerfile": [
+      "FROM python:3.10-slim",
+      "",
+      "WORKDIR /app",
+      "",
+      "COPY main.py /app",
+      "",
+      "RUN pip install flask prometheus_client",
+      "",
+      "EXPOSE 8000",
+      ""
+    ],
+    "config-2024mt03585.yaml": [
+      "apiVersion: v1",
+      "kind: ConfigMap",
+      "metadata:",
+      "name: config-2024mt03585",
+      "data:",
+      "APP_VERSION: \"1.0\"",
+      "APP_TITLE: \"Devops for Cloud Assignment\"",
+      ""
+    ],
+    "dep-2024mt03585.yaml": [
+      "apiVersion: apps/v1",
+      "kind: Deployment",
+      "metadata:",
+      "name: dep-2024mt03585",
+      "spec:",
+      "replicas: 2",
+      "selector:",
+      "matchLabels:",
+      "app: flask-app",
+      "template:"
+    ],
+    "main.py": [
+      "from flask import Flask, jsonify",
+      "import os",
+      "from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST",
+      "from flask import Response",
+      "",
+      "app = Flask(__name__)",
+      "",
+      "# Prometheus counter to track number of requests to /get_info",
+      "REQUEST_COUNTER = Counter(\"get_info_requests_total\", \"Total number of requests to /get_info\")",
+      ""
+    ],
+    "prometheus.yml": [
+      "global:",
+      "scrape_interval: 15s",
+      "",
+      "scrape_configs:",
+      "- job_name: 'flask-app'",
+      "static_configs:",
+      "- targets: ['localhost:8000']",
+      ""
+    ],
+    "svc-2024mt03585.yaml": [
+      "apiVersion: v1",
+      "kind: Service",
+      "metadata:",
+      "name: svc-2024mt03585",
+      "spec:",
+      "selector:",
+      "app: flask-app",
+      "ports:",
+      "- protocol: TCP",
+      "port: 80"
+    ]
+  },
+  "importantFolders": [],
+  "readmeParagraphs": {},
+  "totals": {
+    "numFiles": 7,
+    "numDirs": 0,
+    "totalSizeBytes": 8103,
+    "totalLinesOfCode": 25
+  },
+  "fileCategories": {
+    "other": 2,
+    "config": 4,
+    "source": 1
+  },
+  "linesOfCodePerLanguage": {
+    "Python": 25
+  },
+  "filesPerLanguage": {
+    "Python": 1
+  },
+  "projectTypes": [],
+  "frameworks": [],
+  "entryPoints": ["main.py"],
+  "ciCdTools": ["Docker"],
+  "packageManagers": [],
+  "topLevelDirectories": [],
+  "detailedDirectories": [],
+  "architecturalInsights": {
+    "coreApplications": [],
+    "entryPointDetails": [
+      {
+        "path": "../../../../main.py",
+        "type": "Python Application",
+        "description": "Python application entry point"
+      }
+    ],
+    "serviceArchitecture": {
+      "microservices": [],
+      "monoliths": [],
+      "libraries": []
+    },
+    "layeredArchitecture": {
+      "presentation": [],
+      "business": [],
+      "data": [],
+      "infrastructure": []
+    }
+  },
+  "largeFiles": [],
+  "dependencies": {
+    "production": [],
+    "development": [],
+    "total": 0
+  },
+  "complexity": {
+    "averageFileSize": 3.5714285714285716,
+    "maxFileSize": 0,
+    "nestedDepth": 0,
+    "estimatedComplexity": "low"
+  }
+}

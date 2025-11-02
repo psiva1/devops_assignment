@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-2024mt03585
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-container
+          image: img-2024mt03585
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: config-2024mt03585
+                  key: APP_VERSION
+            - name: APP_TITLE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-2024mt03585
+                  key: APP_TITLE
